@@ -311,7 +311,6 @@ class CompositionWindow(tk.Toplevel):
 	mesg['CC'] = self.ccvar.get()
         #print mesg.as_string()
         #return
-	me = 'mmpozulp@email.wm.edu'
         s = smtplib.SMTP(GMAIL_HOST)
         s.starttls()
         s.login(me, password)
