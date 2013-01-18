@@ -4,6 +4,7 @@ import collections
 import datetime
 import re
 import urllib
+from email.mime.text import MIMEText
 
 import Tkinter as tk
 
@@ -302,12 +303,17 @@ class CompositionWindow(tk.Toplevel):
         button.grid(row=5, column=0, columnspan=12, sticky=tk.W+tk.E)
         
     def send_email(self, event):
-        if False:
-            s = smtplib.SMTP(HOST)
-            s.starttls()
-            s.login(me, password)
-            s.sendmail(me, [to] + CC, mesg.as_string())
-            s.quit()
+        mesg = MIMEText(self.text.get(1.0, tk.END))
+        mesg['Subject'] = self.subjectvar.get()
+        mesg['From'] = self.fromvar.get()
+        mesg['To'] = self.tovar.get()
+        print mesg.as_string()
+        return
+        s = smtplib.SMTP(HOST)
+        s.starttls()
+        s.login(me, password)
+        s.sendmail(me, [to] + CC, mesg.as_string())
+        s.quit()
 
 
 
