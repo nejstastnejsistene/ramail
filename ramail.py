@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import ConfigParser
 import collections
 import datetime
 import re
@@ -304,22 +305,27 @@ class CompositionWindow(tk.Toplevel):
         button.grid(row=5, column=0, columnspan=12, sticky=tk.W+tk.E)
         
     def send_email(self, event):
+        global username, password
         mesg = MIMEText(self.text.get(1.0, tk.END))
         mesg['Subject'] = self.subjectvar.get()
         mesg['From'] = self.fromvar.get()
         mesg['To'] = to = self.tovar.get()
 	mesg['CC'] = self.ccvar.get()
-        #print mesg.as_string()
-        #return
         s = smtplib.SMTP(GMAIL_HOST)
         s.starttls()
-        s.login(me, password)
-        s.sendmail(me, [to] + CC, mesg.as_string())
+        s.login(username, password)
+        s.sendmail(username, [to] + CC, mesg.as_string())
         s.quit()
 
 
 
 if __name__ == '__main__':
+    config = ConfigParser.RawConfigParser()
+    with open('ramail.conf') as f:
+        config.readfp(f)
+    username = config.get('Authentication', 'email')
+    password = config.get('Authentication', 'password')
+
     app = tk.Tk()
     app.title('give me money to buy a new bike!')
     MainWindow(app)
