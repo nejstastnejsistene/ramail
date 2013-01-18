@@ -256,7 +256,7 @@ class MainWindow(tk.Frame):
             name, email, item, start_date, due_date = values
             subject = SUBJECT.format('Key' if item.lower() == 'key' else 'Equipment')
             mesg = compose_message(name, item, start_date, due_date)
-            CompositionWindow(email, 'asdf', subject, mesg)
+            CompositionWindow(email, 'mmpozulp@email.wm.edu', subject, mesg)
 
 
 class CompositionWindow(tk.Toplevel):
