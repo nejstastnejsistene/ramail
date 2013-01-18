@@ -303,14 +303,14 @@ class CompositionWindow(tk.Toplevel):
         button.bind('<Button-1>', self.send_email)
         button.bind('<Return>', self.send_email)
         button.grid(row=5, column=0, columnspan=12, sticky=tk.W+tk.E)
-        
+
     def send_email(self, event):
         global username, password
         mesg = MIMEText(self.text.get(1.0, tk.END))
         mesg['Subject'] = self.subjectvar.get()
         mesg['From'] = self.fromvar.get()
         mesg['To'] = to = self.tovar.get()
-	mesg['CC'] = self.ccvar.get()
+        mesg['CC'] = self.ccvar.get()
         s = smtplib.SMTP(GMAIL_HOST)
         s.starttls()
         s.login(username, password)
