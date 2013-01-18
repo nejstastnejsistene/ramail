@@ -4,11 +4,12 @@ import collections
 import datetime
 import re
 import urllib
+import smtplib
 from email.mime.text import MIMEText
 
 import Tkinter as tk
 
-DEBUG = True
+DEBUG = False
 
 GMAIL_HOST = 'smtp.gmail.com:587'
 DATE_FMT = '%m/%d/%y'
@@ -306,10 +307,12 @@ class CompositionWindow(tk.Toplevel):
         mesg = MIMEText(self.text.get(1.0, tk.END))
         mesg['Subject'] = self.subjectvar.get()
         mesg['From'] = self.fromvar.get()
-        mesg['To'] = self.tovar.get()
-        print mesg.as_string()
-        return
-        s = smtplib.SMTP(HOST)
+        mesg['To'] = to = self.tovar.get()
+	mesg['CC'] = self.ccvar.get()
+        #print mesg.as_string()
+        #return
+	me = 'mmpozulp@email.wm.edu'
+        s = smtplib.SMTP(GMAIL_HOST)
         s.starttls()
         s.login(me, password)
         s.sendmail(me, [to] + CC, mesg.as_string())
