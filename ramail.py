@@ -10,7 +10,7 @@ from email.mime.text import MIMEText
 
 import Tkinter as tk
 
-DEBUG = False
+DEBUG = True
 
 GMAIL_HOST = 'smtp.gmail.com:587'
 DATE_FMT = '%m/%d/%y'
