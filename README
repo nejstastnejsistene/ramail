@@ -1,0 +1,13 @@
+ramail.py
+by: Mike Pozulp & Pitr Johnson
+
+Graphical client to automate copy-paste process of sending 
+outstanding key/equipment reminder emails to residents.
+
+Queries the wm directory web page while entering resident
+name in order to come up with email address. Then drafts
+the email with Head Resident Taylor and Area Director
+Jenn CC'd.
+
+Uses config file to store email service authentication 
+information. Method stores passwords in plain text. 
