@@ -33,12 +33,12 @@ PAST = 'was due on {due_date:{date_fmt}}. Please return it to the duty office AS
 
 def compose_message(name, item, start_date, due_date, date_fmt=DATE_FMT):
     now = datetime.datetime.now()
-    if now.day < due_date.day:
-        sub_mesg = FUTURE
-    elif now.day > due_date.day:
-        sub_mesg = PAST
-    else:
+    if now.day == due_date.day:
         sub_mesg = PRESENT
+    elif now < due_date:
+        sub_mesg = FUTURE
+    else:
+        sub_mesg = PAST
     sub_mesg = sub_mesg.format(**locals())
     return MESG.format(**locals())
 
